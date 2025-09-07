@@ -11,7 +11,7 @@ export default function ServicePage({ params }: ServicePageProps) {
     return (
       <div className="text-center py-20">
         <h1 className="text-3xl font-bold text-red-600 mb-4">Service non trouvé</h1>
-        <p className="text-gray-700">Le service que vous recherchez n'existe pas.</p>
+        <p className="text-gray-700">Le service que vous recherchez n&apos;existe pas.</p>
       </div>
     );
   }
@@ -37,6 +37,7 @@ export default function ServicePage({ params }: ServicePageProps) {
         {service.details && (
           <div className="bg-white/90 shadow-xl rounded-2xl p-10 text-gray-700 space-y-6 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300">
             {service.details.split("\n").map((line, index) => {
+              // Convertit les lignes commençant par 1. ou - en listes
               if (/^\s*(\d+\.|-)/.test(line)) {
                 return (
                   <li key={index} className="ml-6 list-inside list-disc text-gray-600">
@@ -46,7 +47,7 @@ export default function ServicePage({ params }: ServicePageProps) {
               }
               return (
                 <p key={index} className="text-gray-600 leading-relaxed">
-                  {line}
+                  {line.replace(/'/g, "’")}
                 </p>
               );
             })}
@@ -55,10 +56,9 @@ export default function ServicePage({ params }: ServicePageProps) {
 
         {/* CTA */}
         <div className="text-center mt-12">
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
           <a
             href={`https://wa.me/221764757340?text=${encodeURIComponent(
-              `Bonjour Webchild, je souhaite en savoir plus sur votre service : ${service.title}.`
+              `Bonjour Webchild, je souhaite en savoir plus sur votre service : ${service.title.replace(/'/g, "’")}.`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
