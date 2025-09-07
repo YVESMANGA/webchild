@@ -37,7 +37,6 @@ export default function ServicePage({ params }: ServicePageProps) {
         {service.details && (
           <div className="bg-white/90 shadow-xl rounded-2xl p-10 text-gray-700 space-y-6 backdrop-blur-sm hover:shadow-2xl transition-shadow duration-300">
             {service.details.split("\n").map((line, index) => {
-              // Convertit les lignes commençant par 1. ou - en listes
               if (/^\s*(\d+\.|-)/.test(line)) {
                 return (
                   <li key={index} className="ml-6 list-inside list-disc text-gray-600">
@@ -56,16 +55,17 @@ export default function ServicePage({ params }: ServicePageProps) {
 
         {/* CTA */}
         <div className="text-center mt-12">
-        <a
-    href={`https://wa.me/221764757340?text=${encodeURIComponent(
-      `Bonjour Webchild, je souhaite en savoir plus sur votre service : ${service.title}.`
-    )}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-block bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300 shadow-md"
-  >
-    Nous contacter sur WhatsApp
-  </a>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <a
+            href={`https://wa.me/221764757340?text=${encodeURIComponent(
+              `Bonjour Webchild, je souhaite en savoir plus sur votre service : ${service.title}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-green-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300 shadow-md"
+          >
+            Nous contacter sur WhatsApp
+          </a>
         </div>
       </div>
     </div>
